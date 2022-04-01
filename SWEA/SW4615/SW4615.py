@@ -20,44 +20,36 @@ for tc in range(1,num+1):
 
     for _ in range(M):
         x,y,z = map(int, input().split())
+
         y,x = y-1,x-1
-        board[x][y] = z
+        board[y][x] = z
         # 뒤집을 좌표
         res = []
         for i in range(8):
-            #[(1, 0), (-1, 0), (0, -1), (0, 1), (1, -1), (1, 1), (-1, -1), (-1, 1)]
-            dx,dy = delta[i]
-            nx, ny = x+dx, y+dy
-
-            while True:
-                #범위 벗어나면 멈춤
-                if nx<0 or N-1<nx or ny<0 or N-1<ny:
-                    res=[]
-                    break
-                #공백확인시 멈충
-                if board[nx][ny] == 0:
-                    res = []
-                    break
-                #같은 색깔 멈춤
-                if board[nx][ny] == z:
-                    break
+            dx, dy = delta[i]
+            for k in range(N):
+                #[(1, 0), (-1, 0), (0, -1), (0, 1), (1, -1), (1, 1), (-1, -1), (-1, 1)]
+                nx, ny = x+dx*k, y+dy*k
+                #범위안에
+                if 0<=nx<N and 0<=ny<N:
+                    if board[ny][nx]==0:
+                        print('kkk')
+                        break
+                    elif board[ny][nx]==z:
+                        for cy,cx in res:
+                            board[cy][cx]=z
+                        break
+                    else:
+                        res.append((ny,nx))
+                        print('lll')
                 else:
-                    res.append((nx,ny))
-                nx, ny = nx+dx, ny+dy
+                    break
 
-
-            for rx,ry in res:
-                if z==1:
-                    board[rx][ry]=1
-                else:
-                    board[rx][ry]=2
-
-        for a in board:
-            for b in a:
-                print(b, end= " ")
-            print()
-        print()
-
+        # for x in board:
+        #     for y in x:
+        #         print(y, end=" ")
+        #     print()
+        # print()
 
     W, B = 0, 0
     for i in range(N):
