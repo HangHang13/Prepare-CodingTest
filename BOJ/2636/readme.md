@@ -14,9 +14,9 @@
 ## 👺코드
 
 ```python
-import sys
+#import sys
 import collections
-sys.stdin = open('input.txt')
+#sys.stdin = open('input.txt')
 
 dy=[1,-1,0,0]
 dx=[0,0,1,-1]
@@ -31,12 +31,14 @@ def bfs():
             ny = y+dy[i]
             nx = x+dx[i]
             if 0<=ny<n and 0<=nx<m and vis[ny][nx]==0:
+                
                 #치즈가 아닌경우
                 if arr[ny][nx]==0:
                     #방문표시
                     vis[ny][nx]=1
                     #큐삽입
                     q.append((ny,nx))
+                    
                     #치즈인 경우
                 elif arr[ny][nx]==1:
                     #치즈를 녹임
