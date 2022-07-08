@@ -1,63 +1,55 @@
 import sys
 
 input = sys.stdin.readline
-sys.stdin = open('input.txt')
 INF = int(1e9)
 
-# 노드의 개수, 간선의 개수를 입력
-# v, e = map(int, input().split())
 
-n=int(input())
-
-n,m,w = map(int, input().split())
-
-# 모든 간선에 대한 정보를 담는 리스트 만들기
-edges = []
-# 최단 거리 테이블을 모두 무한으로 초기화
-distance = [INF] * (n + 1)
-
-# 모든 간선의 정보 입력
-for _ in range(m):
-    a, b, c = map(int, input().split())
-    # a번 노드에서 b번 노드로 가는 비용이 c라는 의미 (a -> b 의 비용이 c)
-    edges.append((a, b, c))
-
-for _ in range(w):
-    a, b, c = map(int, input().split())
-    edges.append((a,b,-c))
-print(edges)
-def bellman_ford(start):
-    # 시작 노드에 대해서 초기화
-    distance[start] = 0
-    # 전체 v - 1번의 라운드(round)를 반복
+# 벨만 포드 알고리즘 응용 -> 그래프상 음의 싸이클 존재 판단 함수
+def bf(start):
+    dis = [INF] * (n + 1)  # 최단거리 초기화
+    dis[start] = 0
+    # 메인 로직
+    # 음의 사이클 판별을 위해 n번 반복
     for i in range(n):
-        # 매 반복마다 '모든 간선'을 확인한다.
-        for j in range(n+1):
-            cur_node = edges[j][0]
-            next_node = edges[j][1]
-            edge_cost = edges[j][2]
-            # 현재 간선을 거쳐서 다른 노드로 이동하는 거리가 더 짧은 경우
-            if distance[cur_node] != INF and distance[next_node] > distance[cur_node] + edge_cost:
-                distance[next_node] = distance[cur_node] + edge_cost
-                # v번째 라운드에서도 값이 갱신된다면 음수 순환이 존재
+        # 반복마다 모든 간선 확인
+        for edge in edges:
+            cur = edge[0]  # 출발
+            next_node = edge[1]  # 도착
+            cost = edge[2]  # 비용
+
+            # 다음 노드로 이동하는 거리가 최단거리로 갱신가능한 경우
+            if dis[next_node] > cost + dis[cur]:
+                dis[next_node] = cost + dis[cur]
+                # i==n-1이면 n번 돌린건데 이때도 갱신이 발생하면 음의 싸이클 존재
                 if i == n - 1:
                     return True
 
     return False
 
 
-# 벨만 포드 알고리즘 수행
-negative_cycle = bellman_ford(1)
+t = int(input())
 
-# 음수 순환이 존재하면 -1 출력
-if negative_cycle:
-    print("-1")
-else:
-    # 1번 노드를 제외한 다른 모든 노드로 가기 위한 최단 거리를 출력
-    for i in range(2, n + 1):
-        # 도달할 수 없는 경우, -1 출력
-        if distance[i] == INF:
-            print("-1")
-        # 도달할 수 있으면 거리 출력
-        else:
-            print(distance[i])
+for _ in range(t):
+    # 지점수, 도로수, 웜홀수
+    n, m, w = map(int, input().split())
+    edges = []
+
+    # 도로 정보
+    for _ in range(m):
+        s, e, t = map(int, input().split())
+        edges.append((s, e, t))
+        edges.append((e, s, t))
+
+    # 웜홀 정보
+    for _ in range(w):
+        s, e, t = map(int, input().split())
+        edges.append((s, e, -t))
+
+    # bf알고리즘 조건에 dis[cur]!=INF 조건이 없으므로
+    # 시작 위치는 아무거나 무관
+    # bf는 최단거리 알고리즘이 아닌 음의 싸이클의 판별 유무 판단 알고리즘
+    key = bf(1)
+    if key:
+        print("YES")
+    else:
+        print("NO")
