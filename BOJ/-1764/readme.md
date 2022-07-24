@@ -42,3 +42,30 @@ clinton
 baesangwook
 ohhenrie
 ```
+
+## 풀이
+
+- 리스트로 따로 받고 중복제거하려니까 시간초과가 떴다.
+- set과 &를 활용해야한다.
+
+```python
+import sys
+input = sys.stdin.readline
+
+n,m = map(int, input().split())
+
+nolis=set()
+for _ in range(n):
+    nolis.add(input().strip())
+nosee=set()
+for _ in range(m):
+    nosee.add(input().strip())
+
+res= sorted(list(nolis & nosee))
+
+print(len(res))
+# print(res)
+for i in res:
+    print(i)
+```
+
