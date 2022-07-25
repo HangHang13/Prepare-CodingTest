@@ -2,7 +2,11 @@
 
 | 시간 제한 | 메모리 제한 | 제출  | 정답  | 맞힌 사람 | 정답 비율 |
 | :-------- | :---------- | :---- | :---- | :-------- | :-------- |
+<<<<<<< HEAD
+| 2 초      | 256 MB      | 52331 | 21912 | 16559     | 40.397%   |
+=======
 | 2 초      | 256 MB      | 51940 | 21757 | 16427     | 40.393%   |
+>>>>>>> 10211c04aaefe3b1cb6cf8249597b528a8106db0
 
 ## 문제
 
@@ -38,3 +42,30 @@ clinton
 baesangwook
 ohhenrie
 ```
+
+## 풀이
+
+- 리스트로 따로 받고 중복제거하려니까 시간초과가 떴다.
+- set과 &를 활용해야한다.
+
+```python
+import sys
+input = sys.stdin.readline
+
+n,m = map(int, input().split())
+
+nolis=set()
+for _ in range(n):
+    nolis.add(input().strip())
+nosee=set()
+for _ in range(m):
+    nosee.add(input().strip())
+
+res= sorted(list(nolis & nosee))
+
+print(len(res))
+# print(res)
+for i in res:
+    print(i)
+```
+
