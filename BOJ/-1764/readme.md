@@ -61,7 +61,7 @@ nosee=set()
 for _ in range(m):
     nosee.add(input().strip())
 
-res= sorted(list(nolis & nosee))
+res= sorted(list(nolis & nosee)) //& 교집합 이용
 
 print(len(res))
 # print(res)
