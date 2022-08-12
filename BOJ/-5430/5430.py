@@ -1,28 +1,35 @@
-import sys
-input = sys.stdin.readline
-import collections
+from collections import deque
 
-q=collections.deque()
-n= int(input())
-for _ in range(n):
-    kk=input().split()
-    k=int(input())
-    arr = input()
-    t=list()
-    for x in arr:
-        if x =='[' or x==']' or x==',' or x =='\n':
-            continue
-        else:
-            t.append(x)
-    # print(t)
-    if len(t) == 2 or len(t) == 0:
-        print('error')
+t = int(input())
+
+for i in range(t):
+    p = input()
+    n = int(input())
+    arr = input()[1:-1].split(',')
+
+    queue = deque(arr)
+
+    flag = 0
+
+    if n == 0:
+        queue = []
+
+    for j in p:
+        if j == 'R':
+            flag += 1
+        elif j == 'D':
+            if len(queue) == 0:
+                print("error")
+                break
+            else:
+                if flag % 2 == 0:
+                    queue.popleft()
+                else:
+                    queue.pop()
+
     else:
-        while kk:
-            ab = kk.pop(0)
-            if ab=='R':
-                t.reverse() #시간복잡도 높음
-            elif ab=='D':
-                t.pop(0)
-    print(t)
-
+        if flag % 2 == 0:
+            print("[" + ",".join(queue) + "]")
+        else:
+            queue.reverse()
+            print("[" + ",".join(queue) + "]")
