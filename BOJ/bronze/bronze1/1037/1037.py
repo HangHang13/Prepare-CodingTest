@@ -1,0 +1,5 @@
+n=int(input())
+a = list(map(int, input().split()))
+m_in = min(a)
+m_ax = max(a)
+print(m_ax*m_in)
