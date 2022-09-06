@@ -34,8 +34,10 @@ for _ in range(m):
     a,b = map(int, input().split())
     lst[a].append(b)
     lst[b].append(a)
+
 for node in list(lst):
     lst[node] = sorted(lst[node])
+
 
 
 
