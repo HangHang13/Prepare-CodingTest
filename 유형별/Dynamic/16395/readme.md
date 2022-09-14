@@ -60,23 +60,28 @@ n=6일 때, 파스칼 삼각형의 6번째 행의 10은 5번째 행의 인접한
 45
 ```
 
+
+
+## 풀이
+
 ```python
-n=int(input())
-cnt=0
-while 1:
-    if n % 5 ==0:
-        cnt+=n//5
-        break
-    else:
-        n-=2
-        cnt+=1
+n,m = map(int, input().split())
+lst = []
+for a in range(n):
+    lst.append([])
+    lst[a].append(1)
 
-    if n<0:
-        break
+    for j in range(1,a):
+        lst[a].append(lst[a-1][j-1]+lst[a-1][j])
 
-if n <0 :
-    print(-1)
-else:
-    print(cnt)
+    if n!=0:
+        lst[a].append(1)
+
+
+print(lst[n-1][m-1])
+```
+
+```
+dasd
 ```
 
