@@ -43,3 +43,50 @@
 ```
 84
 ```
+
+
+
+## 풀이
+
+
+
+table(n,k) = table(n-1, k) + table(n,k-1) 의 점화식이 생성된다.
+
+
+
+
+
+```python
+import sys
+input = sys.stdin.readline
+
+#n,k 입력
+n,k = map(int, input().split())
+
+
+mod = 1000000000
+
+#2차원 배열 생성
+arr = [[0]*n for _ in range(k)]
+
+
+# 1행 x축 모두 1
+for i in range(n):
+    arr[0][i] = 1
+    
+# 1열 y축은 1씩 증가
+for i in range(k):
+    arr[i][0] = i+1
+
+    
+# 2차원 배열에서 해당 값구하기
+for y in range(1,k):
+    for x in range(1,n):
+        arr[y][x] = (arr[y-1][x]+arr[y][x-1])%mod
+
+
+print(arr[k-1][n-1])
+
+
+```
+
