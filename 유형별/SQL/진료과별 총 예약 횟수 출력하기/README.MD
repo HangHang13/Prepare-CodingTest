@@ -57,11 +57,11 @@ SQL을 실행하면 다음과 같이 출력되어야 합니다.
 ```sql
 
 SELECT
-MCDP_CD AS '진료과코드',
-COUNT(APNT_YMD) AS '5월예약건수'
-FROM APPOINTMENT
-WHERE APNT_YMD LIKE "2022-05%"
-GROUP BY MCDP_CD
+MCDP_CD AS '진료과코드', 
+COUNT(APNT_YMD) AS '5월예약건수' #날짜의 갯수 count
+FROM APPOINTMENT #테이블
+WHERE APNT_YMD LIKE "2022-05%" # 2022-05% 로시작하는 모든것, 
+GROUP BY MCDP_CD #코드별로 그룹화해주어는 것
 ```
 
 | 진료과코드 | 5월예약건수 |
