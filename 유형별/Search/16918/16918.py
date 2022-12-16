@@ -3,7 +3,6 @@ import collections
 
 # input = sys.stdin.readline
 
-q = collections.deque()
 r, c, n = map(int, input().split())
 
 arr = []
@@ -11,54 +10,51 @@ arr = []
 for i in range(r):
     arr.append(list(input()))
 
-for a in arr:
-    for b in a:
-        print(b, end="")
-    print()
-
-dx = [1, -1, 0, 0]
-dy = [0, 0, 1, -1]
-
-cnt = 1
-
-
-def boom(y, x, cnt):
-    if cnt %3 ==0 :
-
-        q.append((y, x))
-        y, x = q.popleft()
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
-            if 0 <= ny < r and 0 <= nx < c:
-                arr[y][x] = '.'
-                arr[ny][nx] = '.'
-
-
-con=1
-while 1:
-
+def check():
     for y in range(r):
         for x in range(c):
             if arr[y][x] == 'O':
-                boom(y, x, cnt)
+                q.append((y, x))
+
+
+def boom():
+    while q:
+        y, x = q.popleft()
+        arr[y][x] = '.'
+        if 0 <= y - 1:
+            arr[y - 1][x] = '.'
+        if y + 1 < r:
+            arr[y + 1][x] = '.'
+        if 0 <= x - 1:
+            arr[y][x - 1] = '.'
+        if x + 1 < c:
+            arr[y][x + 1] = '.'
+
+
+def c4():
+    for y in range(r):
+        for x in range(c):
             if arr[y][x] == '.':
                 arr[y][x] = 'O'
 
-    print()
-    for a in arr:
-        for b in a:
-            print(b, end=" ")
-        print()
 
-    cnt += 1
-    con +=1
-    if con == n:
+n -= 1
+
+while n:
+    q = collections.deque()
+    check()
+    c4()
+    n -= 1
+    if n == 0:
         break
+    boom()
+    n -= 1
+#
+# for a in arr:
+#     for b in a:
+#         print(b, end="")
 
-
-print('===========')
-for a in arr:
-    for b in a:
-        print(b, end=" ")
+for i in range(len(arr)):
+    for j in range(len(arr[0])):
+        print(arr[i][j], end='')
     print()
