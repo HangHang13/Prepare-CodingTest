@@ -78,3 +78,24 @@ N명의 사람들은 매일 아침 한 줄로 선다. 이 사람들은 자리를
 
 ## 풀이
 
+```python
+n= int(input())
+arr= list(map(int, input().split()))
+
+
+ans = [0]* n
+
+for i in range(n):
+    cnt = 0
+    for j in range(n):
+        if cnt == arr[i] and ans[j] == 0:
+            ans[j] = i+1
+            break
+        elif ans[j] == 0:
+            cnt+=1
+
+print(*ans)
+
+
+```
+
