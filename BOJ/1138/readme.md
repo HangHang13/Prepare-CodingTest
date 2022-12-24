@@ -78,6 +78,10 @@ N명의 사람들은 매일 아침 한 줄로 선다. 이 사람들은 자리를
 
 ## 풀이
 
+
+
+숫자만큼 밀어서 방문에 체크해주기
+
 ```python
 n= int(input())
 arr= list(map(int, input().split()))
@@ -86,7 +90,10 @@ arr= list(map(int, input().split()))
 ans = [0]* n
 
 for i in range(n):
+    
+    #포인터
     cnt = 0
+    
     for j in range(n):
         if cnt == arr[i] and ans[j] == 0:
             ans[j] = i+1
