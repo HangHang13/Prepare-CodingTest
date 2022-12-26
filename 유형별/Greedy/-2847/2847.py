@@ -2,16 +2,17 @@ n=int(input())
 
 
 cnt=0
-ant=0
 
+arr=[]
 for _ in range(n):
     a=int(input())
-    if a<=ant:
-        while 1:
-            ant-=1
-            cnt+=1
-            if ant<a:
-                break
-    ant = a
+    arr.append(a)
+
+
+
+for i in range(n-2, -1, -1):
+    if arr[i] >= arr[i+1]:
+        cnt += arr[i] - arr[i+1] +1
+        arr[i] = arr[i+1]-1
 
 print(cnt)
