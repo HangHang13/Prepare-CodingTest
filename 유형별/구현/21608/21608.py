@@ -12,7 +12,7 @@ arr = []
 
 print(grid)
 
-vis = [[False] for _ in range(n)]
+vis = [[False] * n for _ in range(n)]
 
 
 def bfs(num):
@@ -26,3 +26,11 @@ def bfs(num):
                 q.append((ny, nx))
             else:
                 continue
+for a in range(n):
+    bfs(std[a][0])
+
+
+for a in vis:
+    for b in a:
+        print(b, end=" ")
+    print()
