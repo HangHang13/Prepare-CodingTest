@@ -29,3 +29,4 @@ while q:
                     q.append((ny,nx))
                     dist[ny][nx] = dist[y][x]+1
 print(dist[m-1][n-1])
+print(dist)

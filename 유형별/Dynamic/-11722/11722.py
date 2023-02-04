@@ -4,17 +4,12 @@ n=int(input())
 lst = list(map(int, input().split()))
 
 
-
-
-lst.sort(reverse=1)
-
-cnt=1
-for a in range(len(lst)-1):
-    if lst[a] > lst[a+1]:
-        cnt+=1
-    else:
-        continue
+dp = [1] * n
 
 
 
-print(cnt)
+for i in range(n):
+    for j in range(i):
+        if lst[j]>lst[i]:
+            dp[i]= max(dp[i], dp[j]+1)
+print(max(dp))
