@@ -1,23 +1,6 @@
-import sys
+board1= [i for i in range(0,41,2)]
+board2 = [0,2,4,6,8,10,13,16,19,25,30,35,40] # 12 
+board3 = [0,2,4,6,8,10,12,14,16,18,20,22,24,25,30,35,40] # 16 
+board4 = [0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,28,27,26,25,30,35,40] # 22 
+board = [board1,board2,board3,board4]
 
-input = sys.stdin.readline
-
-a = [0 for _ in range(33)]
-for i in range(21):
-    a[i] = i+1
-a[21] = 21
-a[22], a[23], a[24] = 23, 24, 30
-a[25], a[26] = 26, 30
-a[27], a[28], a[29] = 28, 29, 30
-a[30], a[31], a[32] = 31, 32, 20
-
-move_in = [0 for _ in range(16)]
-move_in[5], move_in[10], move_in[15] = 22, 25, 27
-
-plus = [0 for _ in range(33)]
-for i in range(1, 21):
-    plus[i] = i * 2
-plus[22], plus[23], plus[24] = 13, 16, 19
-plus[25], plus[26] = 22, 24
-plus[27], plus[28], plus[29] = 28, 27, 26
-plus[30], plus[31], plus[32] = 25, 30, 35
