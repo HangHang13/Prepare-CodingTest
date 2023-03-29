@@ -15,10 +15,21 @@ def bfs(v):
             print(vis[v])
             return count
         for i in (v - 1, v + 1, v * 2):
-            if 0 <= i <= 100000 and vis[i]==0:
+            if 0 <= i <= 100000 and vis[i] == 0:
                 count[i] = v
                 vis[i] = vis[v] + 1
                 q.append(i)
 
+def path(x):
+    a = []
+    temp = x
 
-print(bfs(n))
+    for _ in range(vis[x] + 1):
+        a.append(temp)
+        temp = count[temp]
+
+    return a[::-1]
+
+(bfs(n))
+print(*path(k))
+print(count)
