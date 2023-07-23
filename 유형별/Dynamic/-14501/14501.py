@@ -15,11 +15,13 @@ for i in range(n):
       if dp[j]<dp[i] + p[i]:
          dp[j] = dp[i] + p[i]
    print(dp)
-print("=====================")
-for i in range(n-1, -1,-1):
-   if i+t[i] > n:
-      dp[i] = dp[i+1]
-   else:
-      dp[i] = max(dp[i+1], p[i]+dp[i])
 
-   print(dp)
+print("=====================")
+# for i in range(n-1, -1,-1):
+#    if i+t[i] > n:
+#       dp[i] = dp[i+1]
+#    else:
+#       dp[i] = max(dp[i+1], p[i]+dp[i])
+#
+#    print(dp)
+
